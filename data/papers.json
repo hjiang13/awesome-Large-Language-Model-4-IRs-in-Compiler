@@ -1,0 +1,9 @@
+[
+  {
+    "title": "IR2Vec: A Learning Representation for LLVM IR",
+    "year": 2019,
+    "url": "https://arxiv.org/abs/1909.06266",
+    "category": "IR Understanding",
+    "notes": "Early representation learning for IR."
+  }
+]
