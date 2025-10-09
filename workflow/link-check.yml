@@ -1,0 +1,15 @@
+name: Check Links
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: "0 0 * * 0"  # every Sunday
+jobs:
+  linkChecker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check links in README
+        uses: lycheeverse/lychee-action@v1.9.2
+        with:
+          args: --verbose --no-progress ./README.md ./NEW_PAPERS.md
