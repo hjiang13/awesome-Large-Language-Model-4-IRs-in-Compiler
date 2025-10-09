@@ -19,8 +19,19 @@ jobs:
           pip install feedparser
       - name: Generate NEW_PAPERS.md
         run: python scripts/fetch_arxiv.py
+      - name: Check for changes
+        id: verify-changed-files
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+          fi
       - name: Commit changes
+        if: steps.verify-changed-files.outputs.changed == 'true'
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "chore(ci): update NEW_PAPERS.md via arXiv fetch"
           file_pattern: NEW_PAPERS.md
+          commit_user_name: "GitHub Actions Bot"
+          commit_user_email: "actions@github.com"
